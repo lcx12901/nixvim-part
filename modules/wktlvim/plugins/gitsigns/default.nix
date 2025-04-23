@@ -29,7 +29,7 @@ in
         untracked.text = symbol_icons.GitSign;
       };
 
-      signcolumn = false;
+      signcolumn = true;
     };
   };
 }
