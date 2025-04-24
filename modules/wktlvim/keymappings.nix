@@ -1,5 +1,4 @@
 {
-  config,
   helpers,
   lib,
   ...
@@ -239,6 +238,64 @@
               options.desc = "Location List";
             };
           };
+      visual =
+        lib.mapAttrsToList
+          (
+            key:
+            { action, ... }@attrs:
+            {
+              mode = "v";
+              inherit action key;
+              options = attrs.options or { };
+            }
+          )
+          {
+            "<S-Tab>" = {
+              action = "<gv";
+              options.desc = "Unindent line";
+            };
+            "<Tab>" = {
+              action = ">gv";
+              options.desc = "Indent line";
+            };
+            # Backspace delete in visual
+            "<BS>" = {
+              action = "x";
+            };
+            # Move selected line/block in visual mode
+            "K" = {
+              action = "<cmd>m '<-2<CR>gv=gv<cr>";
+            };
+            "J" = {
+              action = "<cmd>m '>+1<CR>gv=gv<cr>";
+            };
+          };
+      insert =
+        lib.mapAttrsToList
+          (
+            key:
+            { action, ... }@attrs:
+            {
+              mode = "i";
+              inherit action key;
+              options = attrs.options or { };
+            }
+          )
+          {
+            # Move selected line/block in insert mode
+            "<C-k>" = {
+              action = "<C-o>gk";
+            };
+            "<C-h>" = {
+              action = "<Left>";
+            };
+            "<C-l>" = {
+              action = "<Right>";
+            };
+            "<C-j>" = {
+              action = "<C-o>gj";
+            };
+          };
     in
-    helpers.keymaps.mkKeymaps { options.silent = true; } normal;
+    helpers.keymaps.mkKeymaps { options.silent = true; } (normal ++ visual ++ insert);
 }
