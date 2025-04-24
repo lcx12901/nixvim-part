@@ -1,3 +1,4 @@
+{ lib, config, ... }:
 {
   plugins = {
     comment = {
@@ -24,4 +25,32 @@
       };
     };
   };
+
+  keymaps = lib.mkIf config.plugins.comment.enable [
+    {
+      mode = "n";
+      key = "<Leader>/";
+      action.__raw = ''
+        function()
+          return require("Comment.api").call(
+            "toggle.linewise." .. (vim.v.count == 0 and "current" or "count_repeat"),
+            "g@$"
+          )()
+        end
+      '';
+      options = {
+        desc = "Toggle comment line";
+        expr = true;
+        silent = true;
+      };
+    }
+    {
+      mode = "x";
+      key = "<Leader>/";
+      action = ''"<Esc><Cmd>lua require('Comment.api').locked('toggle.linewise')(vim.fn.visualmode())<CR>"'';
+      options = {
+        desc = "Toggle comment";
+      };
+    }
+  ];
 }
