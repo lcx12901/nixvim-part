@@ -44,7 +44,7 @@
         };
 
         nixd = {
-          enable = false;
+          enable = true;
           settings =
             let
               flake = ''(builtins.getFlake "${self}")'';
@@ -91,6 +91,7 @@
             "typescript"
             "typescriptreact"
             "typescript.tsx"
+            "vue"
           ];
           settings =
             let
@@ -110,20 +111,25 @@
                 inherit inlayHints;
 
                 globalTsdk = "${pkgs.typescript}/lib/node_modules/typescript/lib";
-                locale = "zh-CN";
                 updateImportsOnFileMove.enabled = "always";
               };
 
-              vtsls.tsserver.globalPlugins = [
-                {
-                  name = "@vue/typescript-plugin";
-                  location = "${lib.getBin pkgs.vue-language-server}/lib/node_modules/@vue/language-server";
-                  languages = [ "vue" ];
-                  configNamespace = "typescipt";
-                  enableForWorkspaceTypeScriptVersions = true;
-                }
-              ];
+              vtsls = {
+                tsserver.globalPlugins = [
+                  {
+                    name = "@vue/typescript-plugin";
+                    location = "${lib.getBin pkgs.vue-language-server}/lib/node_modules/@vue/language-server";
+                    languages = [ "vue" ];
+                    configNamespace = "typescript";
+                    enableForWorkspaceTypeScriptVersions = true;
+                  }
+                ];
+              };
             };
+          onAttach.function = ''
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+          '';
         };
 
         volar = {
@@ -146,10 +152,6 @@
 
         eslint = {
           enable = false;
-          cmd = [
-            "vscode-eslint-language-server"
-            "--stdio"
-          ];
           filetypes = [
             "javascript"
             "javascriptreact"

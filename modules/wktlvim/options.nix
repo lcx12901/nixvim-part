@@ -1,4 +1,6 @@
 {
+  lib,
+  config,
   pkgs,
   ...
 }:
@@ -40,10 +42,11 @@
     backspace.__raw = ''vim.list_extend(vim.opt.backspace:get(), { "nostop" })''; # don't stop backspace
     breakindent = true; # wrap indent to match  line start
     cmdheight = 0; # hide command line unless needed
-    completeopt = [
+    completeopt = lib.mkIf (!config.plugins.blink-cmp.enable) [
       "menu"
       "menuone"
       "noselect"
+      "popup"
     ]; # Options for insert mode completion
     confirm = true; # raise a dialog asking if you wish to save the current file(s)
     copyindent = true; # copy the previous indentation on autoindenting
@@ -78,9 +81,12 @@
     timeoutlen = 500; # shorten key timeout length a little bit for which-key
     title = true; # set terminal title to the filename and path
     undofile = true; # enable persistent undo
-    updatetime = 300; # length of time to wait before triggering the plugin
+    updatetime = 100; # length of time to wait before triggering the plugin
     virtualedit = "block"; # allow going past end of line in visual block mode
     wrap = false; # disable wrapping of lines longer than the width of window
     writebackup = false; # disable making a backup before overwriting a file
+    swapfile = false; # Disable the swap file
+
+    report = 9001; # disable "x more/fewer lines" messages
   };
 }
