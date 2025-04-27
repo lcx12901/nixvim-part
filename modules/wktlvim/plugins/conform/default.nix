@@ -47,14 +47,16 @@
         toml = [ "taplo" ];
         yaml = [ "yamlfmt" ];
         sql = [ "sqlfluff" ];
-        json = [ "eslint_d" ];
-        jsonc = [ "eslint_d" ];
-        typescript = [ "eslint_d" ];
-        javascript = [ "eslint_d" ];
-        typescriptreact = [ "eslint_d" ];
-        vue = [ "eslint_d" ];
-        css = [ "eslint_d" ];
-        scss = [ "eslint_d" ];
+        /*
+          json = [ "eslint_d" ];
+          jsonc = [ "eslint_d" ];
+          typescript = [ "eslint_d" ];
+          javascript = [ "eslint_d" ];
+          typescriptreact = [ "eslint_d" ];
+          vue = [ "eslint_d" ];
+          css = [ "eslint_d" ];
+          scss = [ "eslint_d" ];
+        */
       };
 
       formatters = {

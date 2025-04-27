@@ -62,7 +62,7 @@
         };
 
         ts_ls = {
-          enable = true;
+          enable = false;
           settings = {
             typescript = {
               tsserver = {
@@ -134,10 +134,27 @@
 
         volar = {
           enable = true;
+          filetypes = [
+            "javascript"
+            "javascriptreact"
+            "javascript.jsx"
+            "typescript"
+            "typescriptreact"
+            "typescript.tsx"
+            "vue"
+          ];
           extraOptions = {
             init_options = {
               vue = {
-                hybridMode = true;
+                hybridMode = false;
+
+                inlayHints = {
+                  inlineHandlerLeading = true;
+                  missingProps = true;
+                  optionsWrapper = true;
+                  vBindShorthand = true;
+                  destructuredProps = true;
+                };
               };
               typescript = {
                 tsdk = "${pkgs.typescript}/lib/node_modules/typescript/lib";
@@ -151,7 +168,7 @@
         };
 
         eslint = {
-          enable = false;
+          enable = true;
           filetypes = [
             "javascript"
             "javascriptreact"
@@ -221,9 +238,11 @@
               }
             ];
           };
-          onAttach.function = ''
-            vim.api.nvim_create_autocmd("BufWritePre", {buffer = bufnr,command = "EslintFixAll"})
-          '';
+          /*
+            onAttach.function = ''
+              vim.api.nvim_create_autocmd("BufWritePre", {buffer = bufnr,command = "EslintFixAll"})
+            '';
+          */
         };
       };
     };
