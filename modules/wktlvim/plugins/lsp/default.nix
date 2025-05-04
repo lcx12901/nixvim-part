@@ -62,7 +62,7 @@
         };
 
         ts_ls = {
-          enable = false;
+          enable = true;
           settings = {
             typescript = {
               tsserver = {
@@ -80,52 +80,6 @@
               };
             };
           };
-        };
-
-        vtsls = {
-          enable = false;
-          filetypes = [
-            "javascript"
-            "javascriptreact"
-            "javascript.jsx"
-            "typescript"
-            "typescriptreact"
-            "typescript.tsx"
-            "vue"
-          ];
-          settings =
-            let
-              inlayHints = {
-                parameterNames.enabled = "literals";
-                parameterNames.suppressWhenArgumentMatchesName = true;
-                parameterTypes.enabled = true;
-                variableTypes.enabled = true;
-                variableTypes.suppressWhenTypeMatchesName = true;
-                propertyDeclarationTypes.enabled = true;
-                functionLikeReturnTypes.enabled = true;
-                enumMemberValues.enabled = true;
-              };
-            in
-            {
-              typescipt = {
-                inherit inlayHints;
-
-                globalTsdk = "${pkgs.typescript}/lib/node_modules/typescript/lib";
-                updateImportsOnFileMove.enabled = "always";
-              };
-
-              vtsls = {
-                tsserver.globalPlugins = [
-                  {
-                    name = "@vue/typescript-plugin";
-                    location = "${lib.getBin pkgs.vue-language-server}/lib/node_modules/@vue/language-server";
-                    languages = [ "vue" ];
-                    configNamespace = "typescript";
-                    enableForWorkspaceTypeScriptVersions = true;
-                  }
-                ];
-              };
-            };
           onAttach.function = ''
             client.server_capabilities.documentFormattingProvider = false
             client.server_capabilities.documentRangeFormattingProvider = false
@@ -134,19 +88,10 @@
 
         volar = {
           enable = true;
-          filetypes = [
-            "javascript"
-            "javascriptreact"
-            "javascript.jsx"
-            "typescript"
-            "typescriptreact"
-            "typescript.tsx"
-            "vue"
-          ];
           extraOptions = {
             init_options = {
               vue = {
-                hybridMode = false;
+                hybridMode = true;
 
                 inlayHints = {
                   inlineHandlerLeading = true;
@@ -238,11 +183,6 @@
               }
             ];
           };
-          /*
-            onAttach.function = ''
-              vim.api.nvim_create_autocmd("BufWritePre", {buffer = bufnr,command = "EslintFixAll"})
-            '';
-          */
         };
       };
     };
