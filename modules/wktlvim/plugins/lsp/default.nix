@@ -145,7 +145,11 @@
         };
 
         eslint = {
-          enable = true;
+          enable = false;
+          cmd = [
+            "vscode-eslint-language-server"
+            "--stdio"
+          ];
           filetypes = [
             "javascript"
             "javascriptreact"
@@ -216,7 +220,7 @@
             ];
           };
           onAttach.function = ''
-            vim.api.nvim_create_autocmd("BufWritePre", {buffer = bufnr,command = "EslintFixAll",})
+            vim.api.nvim_create_autocmd("BufWritePre", {buffer = bufnr,command = "EslintFixAll"})
           '';
         };
       };
