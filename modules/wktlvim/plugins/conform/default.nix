@@ -33,7 +33,7 @@
               return
             end
 
-            return { timeout_ms = 200, lsp_fallback = true }, on_format
+            return { timeout_ms = 2000, lsp_fallback = true }, on_format
           end
         '';
 
@@ -47,22 +47,29 @@
         toml = [ "taplo" ];
         yaml = [ "yamlfmt" ];
         sql = [ "sqlfluff" ];
-        /*
-          json = [ "eslint_d" ];
-          jsonc = [ "eslint_d" ];
-          typescript = [ "eslint_d" ];
-          javascript = [ "eslint_d" ];
-          typescriptreact = [ "eslint_d" ];
-          vue = [ "eslint_d" ];
-          css = [ "eslint_d" ];
-          scss = [ "eslint_d" ];
-        */
+        json = {
+          __unkeyed-1 = "eslint_d";
+          __unkeyed-2 = "jq";
+          stop_after_first = true;
+        };
+        jsonc = {
+          __unkeyed-1 = "eslint_d";
+          __unkeyed-2 = "jq";
+          stop_after_first = true;
+        };
+        typescript = [ "eslint_d" ];
+        javascript = [ "eslint_d" ];
+        typescriptreact = [ "eslint_d" ];
+        vue = [ "eslint_d" ];
+        css = [ "eslint_d" ];
+        scss = [ "eslint_d" ];
       };
 
       formatters = {
         stylua.command = lib.getExe pkgs.stylua;
         nixfmt.command = lib.getExe pkgs.nixfmt-rfc-style;
         eslint_d.command = lib.getExe pkgs.eslint_d;
+        jq.command = lib.getExe pkgs.jq;
         shellcheck.command = lib.getExe pkgs.shellcheck;
         shellharden.command = lib.getExe pkgs.shellharden;
         shfmt.command = lib.getExe pkgs.shfmt;

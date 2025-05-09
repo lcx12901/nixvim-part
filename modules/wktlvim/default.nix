@@ -16,6 +16,7 @@ in
       ./diagnostics.nix
       ./icons.nix
       ./keymappings.nix
+      ./lsp.nix
       ./options.nix
       ./performance.nix
       ./usercommands.nix
