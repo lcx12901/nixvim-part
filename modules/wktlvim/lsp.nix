@@ -3,7 +3,6 @@
     ./lsp/eslint.nix
     ./lsp/nixd.nix
     ./lsp/ts-ls.nix
-    ./lsp/volar.nix
   ];
 
   lsp = {
@@ -34,6 +33,7 @@
       statix.enable = true;
       yamlls.enable = true;
       unocss.enable = true;
+      volar.enable = true;
     };
   };
 }

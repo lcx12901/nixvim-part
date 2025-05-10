@@ -33,7 +33,7 @@
               return
             end
 
-            return { timeout_ms = 2000, lsp_fallback = true }, on_format
+            return { timeout_ms = 1000, lsp_fallback = true }, on_format
           end
         '';
 
@@ -68,7 +68,26 @@
       formatters = {
         stylua.command = lib.getExe pkgs.stylua;
         nixfmt.command = lib.getExe pkgs.nixfmt-rfc-style;
-        eslint_d.command = lib.getExe pkgs.eslint_d;
+        eslint_d = {
+          command = lib.getExe pkgs.eslint_d;
+          cwd.__raw = ''
+            require("conform.util").root_file({
+              ".eslintrc",
+              ".eslintrc.js",
+              ".eslintrc.cjs",
+              ".eslintrc.yaml",
+              ".eslintrc.yml",
+              ".eslintrc.json",
+              "eslint.config.js",
+              "eslint.config.mjs",
+              "eslint.config.cjs",
+              "eslint.config.ts",
+              "eslint.config.mts",
+              "eslint.config.cts",
+            })
+          '';
+          require_cwd = true;
+        };
         jq.command = lib.getExe pkgs.jq;
         shellcheck.command = lib.getExe pkgs.shellcheck;
         shellharden.command = lib.getExe pkgs.shellharden;

@@ -14,8 +14,6 @@
         "astro"
         "svelte"
         "html"
-        "json"
-        "jsonc"
         "css"
         "scss"
       ];
