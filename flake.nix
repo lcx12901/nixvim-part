@@ -2,7 +2,6 @@
   description = "Description for the project";
 
   inputs = {
-    nixpkgs-master.url = "github:nixos/nixpkgs";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
