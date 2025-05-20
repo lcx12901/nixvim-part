@@ -111,24 +111,7 @@
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
         "pkgs-by-name-for-flake-parts": "pkgs-by-name-for-flake-parts",
-        "resession-nvim": "resession-nvim",
-        "snacks-nvim": "snacks-nvim"
-      }
-    },
-    "snacks-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1740868622,
-        "narHash": "sha256-Gw0Bp2YeoESiBLs3NPnqke3xwEjuiQDDU1CPofrhtig=",
-        "owner": "folke",
-        "repo": "snacks.nvim",
-        "rev": "bc0630e43be5699bb94dadc302c0d21615421d93",
-        "type": "github"
-      },
-      "original": {
-        "owner": "folke",
-        "repo": "snacks.nvim",
-        "type": "github"
+        "resession-nvim": "resession-nvim"
       }
     },
     "systems": {
