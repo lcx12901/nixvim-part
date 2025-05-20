@@ -18,10 +18,6 @@
       };
     };
 
-    snacks-nvim = {
-      url = "github:folke/snacks.nvim";
-      flake = false;
-    };
     resession-nvim = {
       url = "github:stevearc/resession.nvim";
       flake = false;
