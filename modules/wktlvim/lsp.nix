@@ -3,6 +3,7 @@
   imports = [
     ./lsp/eslint.nix
     ./lsp/nixd.nix
+    ./lsp/oxlint.nix
     ./lsp/ts-ls.nix
   ];
 
@@ -35,7 +36,6 @@
       yamlls.enable = true;
       cssls.enable = true;
       unocss.enable = true;
-      oxlint.enable = true;
       volar.enable = true;
     };
   };
