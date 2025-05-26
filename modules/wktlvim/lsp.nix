@@ -33,7 +33,9 @@
       sqls.enable = true;
       statix.enable = true;
       yamlls.enable = true;
+      cssls.enable = true;
       unocss.enable = true;
+      oxlint.enable = true;
       volar.enable = true;
     };
   };

@@ -1,5 +1,4 @@
 {
-
   lsp.servers.eslint = {
     enable = true;
 
@@ -16,6 +15,9 @@
         "html"
         "css"
         "scss"
+      ];
+      root_markers = [
+        "eslint.config.mjs"
       ];
     };
   };
