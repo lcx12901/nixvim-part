@@ -52,7 +52,6 @@
     copyindent = true; # copy the previous indentation on autoindenting
     cursorline = true; # highlight the text line of the cursor
     diffopt.__raw = ''vim.list_extend(vim.opt.diffopt:get(), { "algorithm:histogram", "linematch:60" })''; # enable linematch diff algorithm
-    expandtab = true; # enable the use of space in tab
     fillchars = {
       eob = " ";
     }; # disable `~` on nonexistent lines
@@ -77,6 +76,10 @@
     splitbelow = true; # splitting a new window below the current one
     splitright = true; # splitting a new window at the right of the current one
     tabstop = 2; # number of space in a tab
+    shiftwidth = 2; # Number of spaces used for each step of (auto)indent (local to buffer)
+    softtabstop = 0; # If non-zero, number of spaces to insert for a <Tab> (local to buffer)
+    expandtab = true; # Expand <Tab> to spaces in Insert mode (local to buffer)
+    autoindent = true; # Do clever autoindenting
     termguicolors = true; # enable 24-bit RGB color in the TUI
     timeoutlen = 500; # shorten key timeout length a little bit for which-key
     title = true; # set terminal title to the filename and path
