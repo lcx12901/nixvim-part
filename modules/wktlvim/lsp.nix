@@ -27,7 +27,12 @@
       };
 
       bashls.enable = true;
-      biome.enable = true;
+      biome = {
+        enable = true;
+        settings = {
+          root_markers = [ "biome.json" ];
+        };
+      };
       cssls.enable = true;
       jsonls.enable = true;
       lua_ls.enable = true;
