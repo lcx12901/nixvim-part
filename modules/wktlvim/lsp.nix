@@ -27,6 +27,7 @@
       };
 
       bashls.enable = true;
+      biome.enable = true;
       cssls.enable = true;
       jsonls.enable = true;
       lua_ls.enable = true;

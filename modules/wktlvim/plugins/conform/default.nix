@@ -37,37 +37,47 @@
           end
         '';
 
-      formatters_by_ft = {
-        bash = [
-          "shellcheck"
-          "shellharden"
-          "shfmt"
-        ];
-        nix = [ "nixfmt" ];
-        toml = [ "taplo" ];
-        yaml = [ "yamlfmt" ];
-        sql = [ "sqlfluff" ];
-        json = {
-          __unkeyed-1 = "eslint_d";
-          __unkeyed-2 = "jq";
-          stop_after_first = true;
+      formatters_by_ft =
+        let
+          frontend = {
+            __unkeyed-1 = "eslint_d";
+            __unkeyed-2 = "biome";
+            stop_after_first = true;
+          };
+        in
+        {
+          bash = [
+            "shellcheck"
+            "shellharden"
+            "shfmt"
+          ];
+          nix = [ "nixfmt" ];
+          toml = [ "taplo" ];
+          yaml = [ "yamlfmt" ];
+          sql = [ "sqlfluff" ];
+          json = {
+            __unkeyed-1 = "eslint_d";
+            __unkeyed-2 = "jq";
+            stop_after_first = true;
+          };
+          jsonc = {
+            __unkeyed-1 = "eslint_d";
+            __unkeyed-2 = "biome";
+            __unkeyed-3 = "jq";
+            stop_after_first = true;
+          };
+          typescript = frontend;
+          javascript = frontend;
+          typescriptreact = frontend;
+          vue = frontend;
+          css = frontend;
+          scss = frontend;
         };
-        jsonc = {
-          __unkeyed-1 = "eslint_d";
-          __unkeyed-2 = "jq";
-          stop_after_first = true;
-        };
-        typescript = [ "eslint_d" ];
-        javascript = [ "eslint_d" ];
-        typescriptreact = [ "eslint_d" ];
-        vue = [ "eslint_d" ];
-        css = [ "eslint_d" ];
-        scss = [ "eslint_d" ];
-      };
 
       formatters = {
         stylua.command = lib.getExe pkgs.stylua;
         nixfmt.command = lib.getExe pkgs.nixfmt-rfc-style;
+        biome.command = lib.getExe pkgs.biome;
         eslint_d = {
           command = lib.getExe pkgs.eslint_d;
           cwd.__raw = ''
