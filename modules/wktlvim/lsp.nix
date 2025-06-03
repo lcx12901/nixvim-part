@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./lsp/eslint.nix
@@ -42,7 +47,10 @@
       statix.enable = true;
       yamlls.enable = true;
       unocss.enable = true;
-      volar.enable = true;
+      vue_ls = {
+        enable = true;
+        package = pkgs.vue-language-server;
+      };
     };
   };
 
