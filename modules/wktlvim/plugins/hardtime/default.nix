@@ -9,8 +9,6 @@ in
     hardtime = {
       enable = true;
 
-      lazyLoad.settings.cmd = "Hardtime";
-
       settings = {
         enabled = true;
         disable_mouse = true;
