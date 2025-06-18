@@ -9,8 +9,8 @@ let
 in
 {
   imports = [
-    # ./dashboard.nix
     ./picker.nix
+    ./zen.nix
   ];
 
   extraPackages = with pkgs; [
@@ -28,6 +28,7 @@ in
 
       settings = {
         image.enabled = true;
+        scroll.enabled = true;
         indent = {
           enabled = true;
           indent = {
@@ -46,7 +47,6 @@ in
             end
           '';
         };
-        animate.enabled = false;
         notifier = {
           enabled = true;
           icons = {
