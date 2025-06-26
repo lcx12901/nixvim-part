@@ -17,8 +17,8 @@
     };
   };
 
-  colorscheme = "catppuccin";
-  colorschemes.catppuccin.enable = true;
+  # colorscheme = "catppuccin";
+  # colorschemes.catppuccin.enable = true;
   luaLoader.enable = true;
 
   globals = {
