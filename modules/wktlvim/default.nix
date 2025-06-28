@@ -13,6 +13,7 @@ in
       prev ++ optional (type == "directory") (by-name + "/${name}")
     ) [ ] (readDir by-name))
     ++ [
+      ./autocommands.nix
       ./diagnostics.nix
       ./icons.nix
       ./keymappings.nix
