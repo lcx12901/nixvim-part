@@ -41,6 +41,8 @@
             vim.cmd("highlight GitSignsAddInline cterm=italic gui=italic")
             vim.cmd("highlight GitSignsChangeInline cterm=italic gui=italic")
             vim.cmd("highlight GitSignsDeleteInline cterm=italic gui=italic")
+
+            vim.api.nvim_set_hl(0, "nixInvalidSimpleStringEscape", { link = "Normal" })
           end
         '';
       };
