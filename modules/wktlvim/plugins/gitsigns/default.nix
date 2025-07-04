@@ -32,6 +32,7 @@ in
         };
 
         signcolumn = true;
+        numhl = true;
       };
     };
 
