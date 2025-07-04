@@ -97,26 +97,6 @@
               action.__raw = ''function() require("astrocore").rename_file() end'';
               options.desc = "Rename file";
             };
-            "gra" = {
-              action.__raw = ''function() vim.lsp.buf.code_action() end'';
-              options.desc = "vim.lsp.buf.code_action()";
-            };
-            "grn" = {
-              action.__raw = ''function() vim.lsp.buf.rename() end'';
-              options.desc = "vim.lsp.buf.rename()";
-            };
-            "grr" = {
-              action.__raw = ''function() vim.lsp.buf.references() end'';
-              options.desc = "vim.lsp.buf.references()";
-            };
-            "gri" = {
-              action.__raw = ''function() vim.lsp.buf.implementation() end'';
-              options.desc = "vim.lsp.buf.implementation()";
-            };
-            "gO" = {
-              action.__raw = ''function() vim.lsp.buf.document_symbol() end'';
-              options.desc = "vim.lsp.buf.document_symbol()";
-            };
             # Manage Buffers
             "<Leader>c" = {
               action.__raw = ''function() require("astrocore.buffer").close() end'';

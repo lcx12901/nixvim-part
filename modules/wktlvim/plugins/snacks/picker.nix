@@ -1,5 +1,10 @@
 { config, lib, ... }:
 {
+  imports = [
+    ./picker/git.nix
+    ./picker/lsp.nix
+  ];
+
   plugins = {
     snacks = {
       enable = true;
@@ -55,186 +60,257 @@
       [
         {
           mode = "n";
-          key = "<Leader>gb";
-          action.__raw = ''function() require("snacks").picker.git_branches() end'';
-          options.desc = "Git branches";
+          key = "<leader><space>";
+          action = ''<cmd>lua Snacks.picker.smart()<cr>'';
+          options = {
+            desc = "Smart Find Files";
+          };
         }
         {
           mode = "n";
-          key = "<Leader>gc";
-          action.__raw = ''function() require("snacks").picker.git_log() end'';
-          options.desc = "Git commits (repository)";
+          key = "<leader>:";
+          action = ''<cmd>lua Snacks.picker.command_history()<cr>'';
+          options = {
+            desc = "Command History";
+          };
+        }
+
+        {
+          mode = "n";
+          key = "<leader>fa";
+          action = ''<cmd>lua Snacks.picker.autocmds()<cr>'';
+          options = {
+            desc = "Find autocmds";
+          };
         }
         {
           mode = "n";
-          key = "<Leader>gC";
-          action.__raw = ''function() require("snacks").picker.git_log { current_file = true, follow = true } end'';
-          options.desc = "Git commits (current file)";
+          key = "<leader>fb";
+          action = ''<cmd>lua Snacks.picker.buffers()<cr>'';
+          options = {
+            desc = "Find buffers";
+          };
         }
         {
           mode = "n";
-          key = "<Leader>gt";
-          action.__raw = ''function() require("snacks").picker.git_status() end'';
-          options.desc = "Git status";
+          key = "<leader>fc";
+          action = ''<cmd>lua Snacks.picker.commands()<cr>'';
+          options = {
+            desc = "Find commands";
+          };
         }
         {
           mode = "n";
-          key = "<Leader>gT";
-          action.__raw = ''function() require("snacks").picker.git_stash() end'';
-          options.desc = "Git stash";
-        }
-        {
-          mode = "n";
-          key = "<Leader>f<CR>";
-          action.__raw = ''function() require("snacks").picker.resume() end'';
-          options.desc = "Resume previous search";
-        }
-        {
-          mode = "n";
-          key = "<Leader>f'";
-          action.__raw = ''function() require("snacks").picker.marks() end'';
-          options.desc = "Find marks";
-        }
-        {
-          mode = "n";
-          key = "<Leader>fl";
-          action.__raw = ''function() require("snacks").picker.lines() end'';
-          options.desc = "Find lines";
-        }
-        {
-          mode = "n";
-          key = "<Leader>fb";
-          action.__raw = ''function() require("snacks").picker.buffers() end'';
-          options.desc = "Find buffers";
-        }
-        {
-          mode = "n";
-          key = "<Leader>fc";
-          action.__raw = ''function() require("snacks").picker.grep_word() end'';
-          options.desc = "Find word under cursor";
-        }
-        {
-          mode = "n";
-          key = "<Leader>fC";
-          action.__raw = ''function() require("snacks").picker.commands() end'';
-          options.desc = "Find commands";
-        }
-        {
-          mode = "n";
-          key = "<Leader>ff";
+          key = "<leader>fC";
           action.__raw = ''
             function()
-              require("snacks").picker.files {
-                hidden = vim.tbl_get((vim.uv or vim.loop).fs_stat ".git" or {}, "type") == "directory",
+              require("snacks.picker").files {
+                prompt_title = "Config Files",
+                cwd = vim.fn.stdpath("config"),
               }
             end
           '';
-          options.desc = "Find files";
+          options = {
+            desc = "Find config files";
+            silent = true;
+          };
         }
         {
           mode = "n";
-          key = "<Leader>fF";
-          action.__raw = ''function() require("snacks").picker.files { hidden = true, ignored = true } end'';
-          options.desc = "Find all files";
+          key = "<leader>fe";
+          action = ''<cmd>lua Snacks.explorer()<cr>'';
+          options = {
+            desc = "File Explorer";
+          };
         }
         {
           mode = "n";
-          key = "<Leader>fg";
-          action.__raw = ''function() require("snacks").picker.git_files() end'';
-          options.desc = "Find git files";
+          key = "<leader>ff";
+          action = ''<cmd>lua Snacks.picker.files()<cr>'';
+          options = {
+            desc = "Find files";
+          };
         }
         {
           mode = "n";
-          key = "<Leader>fh";
-          action.__raw = ''function() require("snacks").picker.help() end'';
-          options.desc = "Find help";
+          key = "<leader>fF";
+          action = ''<cmd>lua Snacks.picker.files({hidden = true, ignored = true})<cr>'';
+          options = {
+            desc = "Find files (All files)";
+          };
         }
         {
           mode = "n";
-          key = "<Leader>fk";
-          action.__raw = ''function() require("snacks").picker.keymaps() end'';
-          options.desc = "Find keymaps";
+          key = "<leader>fh";
+          action = ''<cmd>lua Snacks.picker.help()<cr>'';
+          options = {
+            desc = "Find help tags";
+          };
         }
         {
           mode = "n";
-          key = "<Leader>fm";
-          action.__raw = ''function() require("snacks").picker.man() end'';
-          options.desc = "Find man";
+          key = "<leader>fk";
+          action = ''<cmd>lua Snacks.picker.keymaps()<cr>'';
+          options = {
+            desc = "Find keymaps";
+          };
         }
         {
           mode = "n";
-          key = "<Leader>fn";
-          action.__raw = ''function() require("snacks").picker.notifications() end'';
-          options.desc = "Find notifications";
+          key = "<leader>fm";
+          action = ''<cmd>lua Snacks.picker.man()<cr>'';
+          options = {
+            desc = "Find man pages";
+          };
         }
         {
           mode = "n";
-          key = "<Leader>fo";
-          action.__raw = ''function() require("snacks").picker.recent() end'';
-          options.desc = "Find old files";
+          key = "<leader>fo";
+          action = ''<cmd>lua Snacks.picker.recent()<cr>'';
+          options = {
+            desc = "Find old files";
+          };
         }
         {
           mode = "n";
-          key = "<Leader>fO";
-          action.__raw = ''function() require("snacks").picker.recent { filter = { cwd = true } } end'';
-          options.desc = "Find old files (cwd)";
+          key = "<leader>fO";
+          action = ''<cmd>lua Snacks.picker.smart()<cr>'';
+          options = {
+            desc = "Find Smart (Frecency)";
+          };
         }
         {
           mode = "n";
-          key = "<Leader>fp";
-          action.__raw = ''function() require("snacks").picker.projects() end'';
-          options.desc = "Find projects";
+          key = "<leader>fp";
+          action = ''<cmd>lua Snacks.picker.projects()<cr>'';
+          options = {
+            desc = "Find projects";
+          };
         }
         {
           mode = "n";
-          key = "<Leader>fr";
-          action.__raw = ''function() require("snacks").picker.registers() end'';
-          options.desc = "Find registers";
+          key = "<leader>fq";
+          action = ''<cmd>lua Snacks.picker.qflist()<cr>'';
+          options = {
+            desc = "Find quickfix";
+          };
         }
         {
           mode = "n";
-          key = "<Leader>fs";
-          action.__raw = ''function() require("snacks").picker.smart() end'';
-          options.desc = "Find buffers/recent/files";
+          key = "<leader>fr";
+          action = ''<cmd>lua Snacks.picker.registers()<cr>'';
+          options = {
+            desc = "Find registers";
+          };
         }
         {
           mode = "n";
-          key = "<Leader>fw";
-          action.__raw = ''function() require("snacks").picker.grep() end'';
-          options.desc = "Find words";
+          key = "<leader>fS";
+          action = ''<CMD>lua Snacks.picker.spelling({layout = { preset = "select" }})<CR>'';
+          options = {
+            desc = "Find spelling suggestions";
+          };
         }
         {
           mode = "n";
-          key = "<Leader>fW";
-          action.__raw = ''function() require("snacks").picker.grep { hidden = true, ignored = true } end'';
-          options.desc = "Find words in all files";
+          key = "<leader>fT";
+          action = ''<cmd>lua Snacks.picker.colorschemes()<cr>'';
+          options = {
+            desc = "Find theme";
+          };
         }
         {
           mode = "n";
-          key = "<Leader>fu";
-          action.__raw = ''function() require("snacks").picker.undo() end'';
-          options.desc = "Find undo history";
+          key = "<leader>fu";
+          action = "<cmd>lua Snacks.picker.undo()<cr>";
+          options = {
+            desc = "Undo History";
+          };
         }
         {
           mode = "n";
-          key = "<Leader>lD";
-          action.__raw = ''function() require("snacks").picker.diagnostics() end'';
-          options.desc = "Search diagnostics";
+          key = "<leader>fw";
+          action = "<cmd>lua Snacks.picker.grep()<cr>";
+          options = {
+            desc = "Live grep";
+          };
         }
         {
           mode = "n";
-          key = "<Leader>ls";
-          action.__raw = ''
-            function()
-              local aerial_avail, aerial = pcall(require, "aerial")
-              if aerial_avail and aerial.snacks_picker then
-                aerial.snacks_picker()
-              else
-                require("snacks").picker.lsp_symbols()
-              end
-            end
-          '';
-          options.desc = "Search symbols";
+          key = "<leader>fW";
+          action = "<cmd>lua Snacks.picker.grep({hidden = true, ignored = true})<cr>";
+          options = {
+            desc = "Live grep (All files)";
+          };
+        }
+        {
+          mode = "n";
+          key = "<leader>f,";
+          action = ''<cmd>lua Snacks.picker.icons({layout = { preset = "select" }})<cr>'';
+          options = {
+            desc = "Find icons";
+          };
+        }
+        {
+          mode = "n";
+          key = "<leader>f'";
+          action = ''<cmd>lua Snacks.picker.marks()<cr>'';
+          options = {
+            desc = "Find marks";
+          };
+        }
+        {
+          mode = "n";
+          key = "<leader>f/";
+          action = ''<cmd>lua Snacks.picker.lines()<cr>'';
+          options = {
+            desc = "Fuzzy find in current buffer";
+          };
+        }
+        {
+          mode = "n";
+          key = "<leader>f?";
+          action = ''<cmd>lua Snacks.picker.grep_buffers()<cr>'';
+          options = {
+            desc = "Fuzzy find in open buffers";
+          };
+        }
+        {
+          mode = "n";
+          key = "<leader>f<CR>";
+          action = ''<cmd>lua Snacks.picker.resume()<cr>'';
+          options = {
+            desc = "Resume find";
+          };
+        }
+
+        {
+          mode = [
+            "n"
+            "x"
+          ];
+          key = "<leader>sw";
+          action = ''<cmd>lua Snacks.picker.grep_word()<cr>'';
+          options = {
+            desc = "Search Word (visual or cursor)";
+          };
+        }
+
+        {
+          mode = "n";
+          key = "<leader>uC";
+          action = ''<cmd>lua Snacks.picker.colorschemes()<cr>'';
+          options = {
+            desc = "Colorschemes";
+          };
+        }
+        {
+          mode = "n";
+          key = "<leader>X";
+          action = ''<cmd>lua Snacks.profiler.toggle()<cr>'';
+          options = {
+            desc = "Toggle Neovim profiler";
+          };
         }
       ];
 }
