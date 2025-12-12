@@ -1,6 +1,6 @@
 { self, system, ... }:
 {
-  lsp.servers.unocss_language_server = {
+  lsp.servers.unocss = {
     enable = true;
 
     package = self.packages.${system}.unocss-language-server;
