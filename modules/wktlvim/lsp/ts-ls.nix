@@ -3,7 +3,7 @@
   lsp.servers.ts_ls = {
     enable = true;
 
-    settings = {
+    config = {
       filetypes = [
         "typescript"
         "javascript"
@@ -16,7 +16,7 @@
         plugins = [
           {
             name = "@vue/typescript-plugin";
-            location = "${lib.getBin pkgs.vue-language-server}/lib/node_modules/@vue/language-server";
+            location = "${lib.getBin pkgs.vue-language-server}/lib/language-tools/packages/language-server";
             languages = [ "vue" ];
           }
         ];

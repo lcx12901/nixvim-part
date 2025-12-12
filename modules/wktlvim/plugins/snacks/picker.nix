@@ -1,41 +1,42 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  ...
+}:
 {
   imports = [
-    ./picker/git.nix
     ./picker/lsp.nix
   ];
 
   plugins = {
     snacks = {
-      enable = true;
-
       settings = {
         picker = {
-          actions = {
-            calculate_file_truncate_width.__raw = ''
-              function(self)
-                local width = self.list.win:size().width
-                self.opts.formatters.file.truncate = width - 6
-              end
-            '';
+          sources = {
+            noice = lib.mkIf config.plugins.noice.enable {
+              confirm = [
+                "yank"
+                "close"
+              ];
+            };
           };
           win = {
             list = {
               on_buf.__raw = ''
                 function(self)
-                  self:execute 'calculate_file_truncate_width'
+                    self:execute 'calculate_file_truncate_width'
                 end
               '';
             };
             preview = {
               on_buf.__raw = ''
                 function(self)
-                  self:execute 'calculate_file_truncate_width'
+                    self:execute 'calculate_file_truncate_width'
                 end
               '';
               on_close.__raw = ''
                 function(self)
-                  self:execute 'calculate_file_truncate_width'
+                    self:execute 'calculate_file_truncate_width'
                 end
               '';
             };
@@ -53,6 +54,17 @@
         };
       };
     };
+
+    which-key.settings.spec = lib.optionals config.plugins.snacks.enable [
+      {
+        __unkeyed-1 = "<leader>s";
+        mode = [
+          "n"
+          "x"
+        ];
+        desc = "Search";
+      }
+    ];
   };
 
   keymaps =
@@ -133,7 +145,7 @@
         }
         {
           mode = "n";
-          key = "<leader>fF";
+          key = "<leader>fFA";
           action = ''<cmd>lua Snacks.picker.files({hidden = true, ignored = true})<cr>'';
           options = {
             desc = "Find files (All files)";
@@ -211,6 +223,15 @@
             desc = "Find spelling suggestions";
           };
         }
+        # Moved to todo-comments module since lazy loading wasn't working
+        (lib.mkIf (!config.plugins.todo-comments.lazyLoad.enable) {
+          mode = "n";
+          key = "<leader>ft";
+          action = ''<cmd>lua Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" }})<cr>'';
+          options = {
+            desc = "Find TODOs";
+          };
+        })
         {
           mode = "n";
           key = "<leader>fT";

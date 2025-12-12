@@ -1,35 +1,31 @@
-{ config, ... }:
-let
-  inherit (config) symbol_icons;
-in
 {
   diagnostic.settings = {
     update_in_insert = true;
     severity_sort = true;
 
-    virtual_text = true;
+    # NOTE: Opt-in with 0.11
+    virtual_text = {
+      severity.min = "warn";
+      source = "if_many";
+    };
     virtual_lines = {
       current_line = true;
     };
 
     float = {
-      focused = false;
-      style = "minimal";
       border = "rounded";
-      source = true;
     };
 
     jump = {
-      float = true;
       severity.__raw = "vim.diagnostic.severity.WARN";
     };
 
     signs = {
       text = {
-        "__rawKey__vim.diagnostic.severity.ERROR" = "${symbol_icons.DiagnosticError}";
-        "__rawKey__vim.diagnostic.severity.WARN" = "${symbol_icons.DiagnosticWarn}";
-        "__rawKey__vim.diagnostic.severity.HINT" = "${symbol_icons.DiagnosticHint}";
-        "__rawKey__vim.diagnostic.severity.INFO" = "${symbol_icons.DiagnosticInfo}";
+        "__rawKey__vim.diagnostic.severity.ERROR" = "";
+        "__rawKey__vim.diagnostic.severity.WARN" = "";
+        "__rawKey__vim.diagnostic.severity.HINT" = "󰌵";
+        "__rawKey__vim.diagnostic.severity.INFO" = "";
       };
       texthl = {
         "__rawKey__vim.diagnostic.severity.ERROR" = "DiagnosticError";

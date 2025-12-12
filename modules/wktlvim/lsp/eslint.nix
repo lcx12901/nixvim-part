@@ -2,7 +2,7 @@
   lsp.servers.eslint = {
     enable = true;
 
-    settings = {
+    config = {
       filetypes = [
         "javascript"
         "javascriptreact"
@@ -19,9 +19,7 @@
         "scss"
         "postcss"
       ];
-      root_markers = [
-        "eslint.config.mjs"
-      ];
+
       customizations =
         let
           disableRule = patterns: {

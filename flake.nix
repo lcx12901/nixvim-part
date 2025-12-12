@@ -1,27 +1,40 @@
 {
-  description = "Description for the project";
+  description = "nvim in nixos";
 
   inputs = {
+    # Core Nix ecosystem
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-master.url = "github:nixos/nixpkgs";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
 
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    pkgs-by-name-for-flake-parts.url = "github:drupol/pkgs-by-name-for-flake-parts";
-
+    # Applications & packages
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs = {
-        # Optional inputs removed
-        nuschtosSearch.follows = "";
         # Required inputs
         flake-parts.follows = "flake-parts";
         nixpkgs.follows = "nixpkgs";
       };
     };
-
-    resession-nvim = {
-      url = "github:stevearc/resession.nvim";
+    pkgs-by-name-for-flake-parts.url = "github:drupol/pkgs-by-name-for-flake-parts";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    snacks-nvim = {
+      url = "github:folke/snacks.nvim";
       flake = false;
     };
+  };
+
+  nixConfig = {
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+    allow-import-from-derivation = false;
   };
 
   outputs =
@@ -33,7 +46,8 @@
         "aarch64-darwin"
         "x86_64-darwin"
       ];
-
-      imports = [ ./flake ];
+      imports = [
+        ./flake
+      ];
     };
 }

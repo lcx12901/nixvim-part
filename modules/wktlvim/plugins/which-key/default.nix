@@ -1,7 +1,3 @@
-{ config, ... }:
-let
-  inherit (config) symbol_icons;
-in
 {
   plugins.which-key = {
     enable = true;
@@ -11,54 +7,69 @@ in
     settings = {
       spec = [
         {
-          __unkeyed-1 = "<leader>f";
-          group = "Find";
-          icon = symbol_icons.Search;
+          __unkeyed-1 = "<leader>/";
+          icon = "";
         }
         {
-          __unkeyed-1 = "<leader>l";
-          group = "Language Tools";
-          icon = symbol_icons.ActiveLSP;
+          __unkeyed-1 = "<leader>a";
+          group = "AI Assistant";
+          icon = "";
+          mode = [
+            "n"
+            "v"
+          ];
         }
         {
-          __unkeyed-1 = "<leader>u";
-          group = "UI/UX";
-          icon = symbol_icons.Window;
+          __unkeyed-1 = "<leader>gd";
+          group = "Diff";
+          icon = " ";
         }
         {
           __unkeyed-1 = "<leader>b";
           group = "Buffers";
-          icon = symbol_icons.Tab;
         }
         {
           __unkeyed-1 = "<leader>bs";
-          group = "Sort Buffers";
-          icon = symbol_icons.Sort;
-        }
-        {
-          __unkeyed-1 = "<leader>d";
-          group = "Debugger";
-          icon = symbol_icons.Debugger;
+          group = "󰒺 Sort";
+          icon = "";
         }
         {
           __unkeyed-1 = "<leader>g";
           group = "Git";
-          icon = symbol_icons.Git;
+          mode = [
+            "n"
+            "v"
+          ];
         }
         {
-          __unkeyed-1 = "<leader>S";
-          group = "Session";
-          icon = symbol_icons.Session;
+          __unkeyed-1 = "<leader>gf";
+          group = "Git Find";
         }
         {
-          __unkeyed-1 = "<leader>t";
-          group = "Terminal";
-          icon = symbol_icons.Terminal;
+          __unkeyed-1 = "<leader>f";
+          group = "Find";
         }
         {
-          __unkeyed-1 = "<leader>x";
-          group = "Quickfix/Lists";
-          icon = symbol_icons.List;
+          __unkeyed-1 = "<leader>r";
+          group = "Refactor";
+          icon = " ";
+        }
+        {
+          __unkeyed-1 = "<leader>u";
+          group = "UI/UX";
+        }
+        {
+          __unkeyed-1 = "<leader>uc";
+          group = "Completion";
+          icon = "󰘦";
+        }
+        {
+          __unkeyed-1 = "<leader>w";
+          icon = "";
+        }
+        {
+          __unkeyed-1 = "<leader>W";
+          icon = "󰽃";
         }
       ];
 

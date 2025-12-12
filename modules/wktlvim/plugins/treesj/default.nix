@@ -1,10 +1,15 @@
-{ pkgs, ... }:
 {
-  extraPlugins = [
-    pkgs.vimPlugins.treesj
-  ];
+  plugins.treesj = {
+    enable = true;
 
-  extraConfigLua = ''
-    require('treesj').setup({--[[ your config ]]})
-  '';
+    lazyLoad = {
+      settings = {
+        keys = [
+          "<leader>m"
+          "<leader>j"
+          "<leader>s"
+        ];
+      };
+    };
+  };
 }

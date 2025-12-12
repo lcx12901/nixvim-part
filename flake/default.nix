@@ -7,7 +7,7 @@
 {
   imports = [
     ./nixvim.nix
-    ./pkgs-by-name.nix
+    # ./pkgs-by-name.nix
     ./overlays.nix
   ];
 

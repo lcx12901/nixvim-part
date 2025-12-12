@@ -1,0 +1,27 @@
+_:
+let
+  mkBlinkPlugin =
+    {
+      enable ? true,
+      ...
+    }@args:
+    {
+      inherit enable;
+      lazyLoad.settings.event = [
+        "InsertEnter"
+        "CmdlineEnter"
+      ];
+    }
+    // (builtins.removeAttrs args [ "enable" ]);
+in
+{
+  plugins = {
+    # keep-sorted start block=yes
+    blink-cmp-dictionary = mkBlinkPlugin { };
+    blink-cmp-spell = mkBlinkPlugin { };
+    blink-copilot = mkBlinkPlugin { };
+    blink-emoji = mkBlinkPlugin { };
+    blink-ripgrep = mkBlinkPlugin { };
+    # keep-sorted end
+  };
+}

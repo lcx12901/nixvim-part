@@ -1,10 +1,17 @@
 {
-  lib,
   config,
+  lib,
   pkgs,
   ...
 }:
 {
+  extraPlugins = lib.optionals config.plugins.copilot-lua.enable (
+    with pkgs.vimPlugins;
+    lib.optionals config.plugins.lualine.enable [
+      copilot-lualine
+    ]
+  );
+
   plugins = {
     copilot-lua = {
       enable = true;
@@ -12,123 +19,74 @@
       lazyLoad.settings.event = [ "InsertEnter" ];
 
       settings = {
-        panel.enabled = !config.plugins.blink-cmp-copilot.enable;
-        suggestion.enabled = !config.plugins.blink-cmp-copilot.enable;
-        lsp_binary = lib.getExe pkgs.copilot-language-server;
+        nes = lib.mkIf (!config.plugins.sidekick.enable) {
+          enabled = true;
+          keymap = {
+            accept_and_goto = "<TAB>";
+            accept = false;
+            dismiss = "<Esc>";
+          };
+        };
+
+        suggestion = lib.mkIf (!config.plugins.blink-cmp.enable) {
+          enabled = true;
+          auto_trigger = true;
+          keymap = {
+            accept = "<C-y>";
+            accept_word = "<M-w>";
+            accept_line = "<M-e>";
+            next = "<M-]>";
+            prev = "<M-[>";
+            dismiss = "<C-n>";
+          };
+        };
+
+        panel = lib.mkIf (!config.plugins.blink-cmp.enable) {
+          enabled = true;
+          auto_refresh = true;
+          keymap = {
+            jump_prev = "[[";
+            jump_next = "]]";
+            accept = "<cr>";
+            refresh = "gr";
+            open = "<M-CR>";
+          };
+          layout = {
+            position = "bottom";
+            ratio = 0.4;
+          };
+        };
+
+        filetypes = {
+          yaml = false;
+          markdown = false;
+          json = false;
+          help = false;
+          gitcommit = false;
+          gitrebase = false;
+        };
       };
     };
-
-    copilot-chat = {
-      inherit (config.plugins.copilot-lua) enable;
-
-      lazyLoad.settings.cmd = [
-        "CopilotChat"
-        "CopilotChatAgents"
-        "CopilotChatLoad"
-        "CopilotChatModels"
-        "CopilotChatOpen"
-        "CopilotChatToggle"
-      ];
-    };
-
-    which-key.settings.spec = lib.optionals config.plugins.copilot-chat.enable [
-      {
-        __unkeyed-1 = "<leader>aC";
-        group = "Copilot";
-        icon = "";
-      }
-    ];
   };
 
-  keymaps = lib.mkIf config.plugins.copilot-chat.enable [
+  autoCmd = lib.mkIf config.plugins.copilot-lua.enable [
     {
-      mode = "n";
-      key = "<leader>aCc";
-      action = "<cmd>CopilotChat<CR>";
-      options = {
-        desc = "Open Chat";
-      };
-    }
-    {
-      mode = "n";
-      key = "<leader>aCq";
-      action.__raw = ''
+      event = "User";
+      pattern = "BlinkCmpMenuOpen";
+      callback.__raw = ''
         function()
-          local input = vim.fn.input("Quick Chat: ")
-          if input ~= "" then
-            require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
-          end
+          vim.b.copilot_suggestion_hidden = true
         end
       '';
-      options = {
-        desc = "Quick Chat";
-      };
     }
     {
-      mode = "n";
-      key = "<leader>aCh";
-      action.__raw = ''
+      event = "User";
+      pattern = "BlinkCmpMenuClose";
+      callback.__raw = ''
         function()
-          local actions = require("CopilotChat.actions")
-          require("CopilotChat.integrations.telescope").pick(actions.help_actions())
+          vim.b.copilot_suggestion_hidden = false
         end
       '';
-      options = {
-        desc = "Help Actions";
-      };
-    }
-    {
-      mode = "n";
-      key = "<leader>aCp";
-      action.__raw = ''
-        function()
-          local actions = require("CopilotChat.actions")
-          require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
-        end
-      '';
-      options = {
-        desc = "Prompt Actions";
-      };
-    }
-    {
-      mode = "n";
-      key = "<leader>aCa";
-      action = "<cmd>CopilotChatAgents<CR>";
-      options = {
-        desc = "List Available Agents";
-      };
-    }
-    {
-      mode = "n";
-      key = "<leader>aCl";
-      action = "<cmd>CopilotChatLoad<CR>";
-      options = {
-        desc = "Load Chat History";
-      };
-    }
-    {
-      mode = "n";
-      key = "<leader>aCm";
-      action = "<cmd>CopilotChatModels<CR>";
-      options = {
-        desc = "List Available Models";
-      };
-    }
-    {
-      mode = "n";
-      key = "<leader>aCo";
-      action = "<cmd>CopilotChatOpen<CR>";
-      options = {
-        desc = "Open Chat Window";
-      };
-    }
-    {
-      mode = "n";
-      key = "<leader>aCt";
-      action = "<cmd>CopilotChatToggle<CR>";
-      options = {
-        desc = "Toggle Chat Window";
-      };
     }
   ];
 }
