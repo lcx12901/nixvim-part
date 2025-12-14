@@ -31,6 +31,9 @@ in
 
     settings = {
       options = {
+        component_separators = "";
+        section_separators = "";
+
         disabled_filetypes = {
           __unkeyed-1 = "startify";
           __unkeyed-2 = "neo-tree";
@@ -67,17 +70,46 @@ in
       # | A | B | C                             X | Y | Z |
       # +-------------------------------------------------+
       sections = {
-        lualine_a = [ "mode" ];
-        lualine_b = [ "branch" ];
+        lualine_a = [
+          {
+            __unkeyed-1 = "mode";
+            icons_enabled = true;
+            icon = "";
+            separator = {
+              left = "";
+              right = "";
+            };
+          }
+        ];
+        lualine_b = [
+          {
+            __unkeyed-1 = "branch";
+            icon = "";
+            separator = {
+              right = "";
+            };
+          }
+        ];
         lualine_c = [
           "filename"
-          "diff"
+          {
+            __unkeyed-1 = "diff";
+            symbols = {
+              added = " ";
+              modified = " ";
+              removed = " ";
+            };
+          }
         ];
 
         lualine_x = [
-          # { __raw = ''Snacks.profiler.status()''; }
           {
             __unkeyed-1 = "diagnostics";
+            symbols = {
+              error = " ";
+              warn = " ";
+              info = " ";
+            };
             diagnostics_color = {
               error = {
                 fg = "#ed8796";
@@ -115,11 +147,10 @@ in
               end
             '';
             icon = " ";
-            color.fg = "#ffffff";
+            color.fg = "#a9a1e1";
           }
-          "encoding"
-          "fileformat"
           "filetype"
+          "fileformat"
         ];
 
         lualine_z = [
@@ -140,21 +171,6 @@ in
           }
         ];
         lualine_z = [ "tabs" ];
-      };
-
-      winbar = {
-        lualine_c = [
-          (lib.mkIf config.plugins.navic.enable {
-            __unkeyed-1 = "navic";
-            inherit cond;
-            color_correction = "static";
-            navic_opts = {
-              highlight = true;
-              depth_limit = 5;
-              depth_limit_indicator = "...";
-            };
-          })
-        ];
       };
     };
   };
