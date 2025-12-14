@@ -1,24 +1,4 @@
 { config, lib, ... }:
-let
-  cond.__raw = ''
-    function()
-      local cache = {}
-      return function()
-        local bufnr = vim.api.nvim_get_current_buf()
-        if cache[bufnr] == nil then
-          local buf_size = vim.api.nvim_buf_get_offset(bufnr, vim.api.nvim_buf_line_count(bufnr))
-          cache[bufnr] = buf_size < 1024 * 1024 -- 1MB limit
-          -- Clear cache on buffer unload
-          vim.api.nvim_create_autocmd("BufUnload", {
-            buffer = bufnr,
-            callback = function() cache[bufnr] = nil end,
-          })
-        end
-        return cache[bufnr]
-      end
-    end
-  '';
-in
 {
   plugins.lualine = {
     enable = true;
@@ -153,12 +133,7 @@ in
           "fileformat"
         ];
 
-        lualine_z = [
-          {
-            __unkeyed-1 = "location";
-            inherit cond;
-          }
-        ];
+        lualine_z = [ "location" ];
       };
 
       tabline = lib.mkIf (!config.plugins.bufferline.enable) {
