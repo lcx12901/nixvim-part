@@ -20,23 +20,19 @@
             languages = [ "vue" ];
           }
         ];
-      };
 
-      typescript = {
-        tsserver = {
-          maxTsServerMemory = 16184;
+        maxTsServerMemory = 16184;
+
+        preferences = {
+          includeInlayParameterNameHints = "all";
+          includeInlayParameterNameHintsWhenArgumentMatchesName = true;
+          includeInlayFunctionParameterTypeHints = true;
+          includeInlayVariableTypeHints = true;
+          includeInlayVariableTypeHintsWhenTypeMatchesName = true;
+          includeInlayPropertyDeclarationTypeHints = true;
+          includeInlayFunctionLikeReturnTypeHints = true;
+          includeInlayEnumMemberValueHints = true;
         };
-      };
-
-      preferences = {
-        includeInlayParameterNameHints = "all";
-        includeInlayParameterNameHintsWhenArgumentMatchesName = true;
-        includeInlayFunctionParameterTypeHints = true;
-        includeInlayVariableTypeHints = true;
-        includeInlayVariableTypeHintsWhenTypeMatchesName = true;
-        includeInlayPropertyDeclarationTypeHints = true;
-        includeInlayFunctionLikeReturnTypeHints = true;
-        includeInlayEnumMemberValueHints = true;
       };
     };
   };
