@@ -36,12 +36,6 @@
           ${lib.optionalString config.plugins.blink-cmp-git.enable "table.insert(git_sources, 'git')"}
           ${lib.optionalString (lib.elem pkgs.vimPlugins.blink-cmp-conventional-commits config.extraPlugins) "table.insert(git_sources, 'conventional_commits')"}
           return git_sources
-        ${lib.optionalString config.plugins.avante.enable # Lua
-          ''
-            elseif vim.bo.filetype == 'AvanteInput' then
-              return { 'buffer', 'avante' }
-          ''
-        }
         else
           return common_sources
         end
