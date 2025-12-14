@@ -39,13 +39,13 @@
               action = "<cmd>b#<CR>";
             };
             # navigate to left/right window
-            "<leader>[" = {
+            "<C-h>" = {
               action = "<C-w>h";
               options = {
                 desc = "Left window";
               };
             };
-            "<leader>]" = {
+            "<C-l>" = {
               action = "<C-w>l";
               options = {
                 desc = "Right window";

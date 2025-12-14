@@ -62,9 +62,37 @@
         desc = "Lsp diagnostic open_float";
       };
     }
+    # Code action keymap
+    {
+      key = "<leader>la";
+      mode = "n";
+      action = lib.nixvim.mkRaw "vim.lsp.buf.code_action";
+      options = {
+        silent = true;
+        desc = "Lsp buf code_action";
+      };
+    }
+    {
+      key = "<leader>lA";
+      mode = "n";
+      action = lib.nixvim.mkRaw ''
+        function()
+          vim.lsp.buf.code_action {
+            apply = true,
+            context = {
+              only = { "source" },
+              diagnostics = {},
+            }
+          }
+        end
+      '';
+      options = {
+        silent = true;
+        desc = "Lsp source action";
+      };
+    }
   ]
   ++ lib.optionals (!config.plugins.conform-nvim.enable) [
-    # Format keymap (if conform-nvim is not enabled)
     {
       key = "<leader>lf";
       mode = "n";
@@ -75,24 +103,6 @@
       };
     }
   ]
-  ++
-    lib.optionals
-      (
-        !config.plugins.fzf-lua.enable
-        || (config.plugins.snacks.enable && lib.hasAttr "picker" config.plugins.snacks.settings)
-      )
-      [
-        # Code action keymap (if fzf-lua is not enabled)
-        {
-          key = "<leader>la";
-          mode = "n";
-          action = lib.nixvim.mkRaw "vim.lsp.buf.code_action";
-          options = {
-            silent = true;
-            desc = "Lsp buf code_action";
-          };
-        }
-      ]
   ++
     lib.optionals
       (
@@ -149,6 +159,10 @@
       {
         __unkeyed-1 = "<leader>la";
         desc = "Code Action";
+      }
+      {
+        __unkeyed-1 = "<leader>lA";
+        desc = "Source Action";
       }
       {
         __unkeyed-1 = "<leader>ld";
