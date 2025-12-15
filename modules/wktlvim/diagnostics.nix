@@ -1,16 +1,10 @@
 {
   diagnostic.settings = {
-    update_in_insert = true;
+    update_in_insert = false;
     severity_sort = true;
 
-    # NOTE: Opt-in with 0.11
-    virtual_text = {
-      severity.min = "warn";
-      source = "if_many";
-    };
-    virtual_lines = {
-      current_line = true;
-    };
+    virtual_text = false;
+    virtual_lines = false;
 
     float = {
       border = "rounded";
