@@ -72,7 +72,7 @@
 
   opts = {
     # Performance & Timing
-    updatetime = 100; # CursorHold delay; faster completion and git signs
+    updatetime = 300; # CursorHold delay; balanced for LSP performance
     lazyredraw = false; # Breaks noice plugin
     synmaxcol = 240; # Disable syntax highlighting for long lines
     timeoutlen = 500; # Key sequence timeout (ms)

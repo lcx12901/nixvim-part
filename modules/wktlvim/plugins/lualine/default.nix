@@ -71,7 +71,14 @@
           }
         ];
         lualine_c = [
-          "filename"
+          {
+            __unkeyed-1 = "filename";
+            symbols = {
+              modified = "●";
+              alternate_file = "#";
+              directory = "";
+            };
+          }
           {
             __unkeyed-1 = "diff";
             symbols = {
