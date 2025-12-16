@@ -55,12 +55,4 @@ stdenv.mkDerivation (finalAttrs: {
   '';
 
   passthru.updateScript = nix-update-script { };
-
-  meta = {
-    description = "A language server for unocss";
-    homepage = "https://github.com/xna00/unocss-language-server#readme";
-    changelog = "https://github.com/vuejs/language-tools/releases/tag/v${finalAttrs.version}";
-    license = lib.licenses.mit;
-    mainProgram = "unocss-language-server";
-  };
 })
