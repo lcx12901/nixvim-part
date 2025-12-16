@@ -9,7 +9,7 @@
     default.__raw = ''
       function(ctx)
         -- Base sources that are always available
-        local base_sources = { 'buffer', 'lsp', 'path', 'snippets' }
+        local base_sources = {'lsp', 'buffer', 'path', 'snippets'}
 
         -- Build common sources list dynamically based on enabled plugins
         local common_sources = vim.deepcopy(base_sources)
@@ -44,11 +44,10 @@
 
     providers = {
       # BUILT-IN SOURCES
-      # keep-sorted start block=yes newline_separated=yes
       buffer = {
-        score_offset = 45;
+        score_offset = 2;
         min_keyword_length = 2;
-        max_items = 15;
+        max_items = 3;
         opts = {
           # Allow searching all open buffers or just current.
           get_bufnrs.__raw = ''
@@ -68,7 +67,7 @@
       };
 
       lsp = {
-        score_offset = 100;
+        score_offset = 4;
         fallbacks = [ ]; # Allow buffer to show independently
         transform_items.__raw = ''
           function(_, items)
@@ -80,7 +79,7 @@
       };
 
       path = {
-        score_offset = 55;
+        score_offset = 2;
         opts = {
           # Toggle support for path completions from project root. Default normal behavior
           get_cwd.__raw = ''
@@ -102,34 +101,21 @@
       };
 
       snippets = {
-        score_offset = 60;
+        score_offset = 1;
         should_show_items.__raw = ''
           function(ctx)
             return ctx.trigger.initial_kind ~= 'trigger_character'
           end
         '';
       };
-      # keep-sorted end
 
       # Community sources
-      # keep-sorted start block=yes newline_separated=yes
-      avante = lib.mkIf config.plugins.avante.enable {
-        module = "blink-cmp-avante";
-        name = "Avante";
-        score_offset = 68;
-        enabled.__raw = ''
-          function()
-            return vim.bo.filetype == 'AvanteInput'
-          end
-        '';
-      };
-
       conventional_commits =
         lib.mkIf (lib.elem pkgs.vimPlugins.blink-cmp-conventional-commits config.extraPlugins)
           {
             name = "Conventional Commits";
             module = "blink-cmp-conventional-commits";
-            score_offset = 68;
+            score_offset = 1;
             enabled.__raw = ''
               function()
                 return vim.bo.filetype == 'gitcommit'
@@ -150,8 +136,8 @@
         name = "Dict";
         module = "blink-cmp-dictionary";
         min_keyword_length = 3;
-        max_items = 8;
-        score_offset = 8;
+        max_items = 2;
+        score_offset = 1;
         opts = lib.mkIf config.plugins.blink-cmp-words.enable {
           dictionary_search_threshold = 3;
           definition_pointers = [
@@ -165,14 +151,14 @@
       emoji = lib.mkIf config.plugins.blink-emoji.enable {
         name = "Emoji";
         module = "blink-emoji";
-        score_offset = 10;
+        score_offset = 1;
       };
 
       git = lib.mkIf config.plugins.blink-cmp-git.enable {
         name = "Git";
         module = "blink-cmp-git";
         enabled = true;
-        score_offset = 70;
+        score_offset = 1;
         should_show_items.__raw = ''
           function()
             return vim.o.filetype == 'gitcommit' or vim.o.filetype == 'markdown'
@@ -192,7 +178,7 @@
       nerdfont = lib.mkIf (lib.elem pkgs.vimPlugins.blink-nerdfont-nvim config.extraPlugins) {
         module = "blink-nerdfont";
         name = "Nerd Fonts";
-        score_offset = 68;
+        score_offset = 1;
         opts = {
           insert = true;
         };
@@ -203,7 +189,7 @@
         module = "blink-cmp-npm";
         async = true;
         timeout_ms = 2000;
-        score_offset = 70;
+        score_offset = 1;
         enabled.__raw = ''
           function()
             return vim.fn.expand('%:t') == 'package.json'
@@ -221,25 +207,23 @@
         module = "blink-ripgrep";
         async = true;
         timeout_ms = 500;
-        max_items = 10;
         min_keyword_length = 4;
-        score_offset = 5;
+        score_offset = 1;
       };
 
       spell = lib.mkIf config.plugins.blink-cmp-spell.enable {
         name = "Spell";
         module = "blink-cmp-spell";
-        max_items = 3;
-        score_offset = 15;
+        max_items = 2;
+        score_offset = 1;
       };
 
       yank = lib.mkIf (lib.elem pkgs.vimPlugins.blink-cmp-yanky config.extraPlugins) {
         name = "yank";
         module = "blink-yanky";
-        score_offset = 69;
+        score_offset = 1;
         max_items = 3;
       };
-      # keep-sorted end
     };
   };
 }

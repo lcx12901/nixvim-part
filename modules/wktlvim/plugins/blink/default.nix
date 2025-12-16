@@ -62,9 +62,12 @@
           window.border = "rounded";
         };
 
-        list.selection = {
-          auto_insert = false;
-          preselect = false;
+        list = {
+          max_items = 20;
+          selection = {
+            auto_insert = false;
+            preselect = false;
+          };
         };
 
         menu = {

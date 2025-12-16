@@ -18,6 +18,7 @@ in
   plugins = {
     # keep-sorted start block=yes
     blink-cmp-dictionary = mkBlinkPlugin { };
+    blink-cmp-git = mkBlinkPlugin { };
     blink-cmp-spell = mkBlinkPlugin { };
     blink-copilot = mkBlinkPlugin { };
     blink-emoji = mkBlinkPlugin { };

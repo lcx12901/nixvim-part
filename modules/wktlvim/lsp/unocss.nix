@@ -1,9 +1,8 @@
-{ self, system, ... }:
+{ self, pkgs, ... }:
 {
   lsp.servers.unocss = {
     enable = true;
 
-    package = self.packages.${system}.unocss-language-server;
-
+    package = self.packages.${pkgs.stdenv.hostPlatform.system}.unocss-language-server;
   };
 }
