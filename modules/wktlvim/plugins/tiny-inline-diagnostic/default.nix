@@ -10,7 +10,7 @@
         show_source.enabled = true;
         break_line.enabled = true;
       };
-      preset = "amongus";
+      preset = "ghost";
     };
   };
 }
