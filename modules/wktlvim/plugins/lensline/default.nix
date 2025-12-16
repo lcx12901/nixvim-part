@@ -37,7 +37,7 @@
               }
             ];
             style = {
-              placement = "inline";
+              placement = "above";
               prefix = "";
             };
           }
