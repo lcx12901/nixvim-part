@@ -74,6 +74,7 @@
 
           progress.enabled = true;
           signature.enabled = false;
+          hover.enabled = true;
         };
 
         popupmenu.backend = "nui";
