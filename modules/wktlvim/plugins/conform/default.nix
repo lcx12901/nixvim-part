@@ -84,7 +84,16 @@
             "xmlformat"
             "xmllint"
           ];
-          yaml = [ "yamlfmt" ];
+          json = {
+            __unkeyed-1 = "eslint_d";
+            __unkeyed-2 = "jq";
+            stop_after_first = true;
+          };
+          yaml = {
+            __unkeyed-1 = "eslint_d";
+            __unkeyed-2 = "yamlfmt";
+            stop_after_first = true;
+          };
           typescript = [ "eslint_d" ];
           vue = [ "eslint_d" ];
           "_" = [

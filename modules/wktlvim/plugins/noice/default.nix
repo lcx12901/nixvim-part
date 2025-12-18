@@ -73,7 +73,7 @@
           };
 
           progress.enabled = true;
-          signature.enabled = false;
+          signature.enabled = true;
           hover.enabled = true;
         };
 

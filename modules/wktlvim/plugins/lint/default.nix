@@ -35,7 +35,6 @@
         shellcheck.cmd = lib.getExe pkgs.shellcheck;
         sqlfluff.cmd = lib.getExe pkgs.sqlfluff;
         statix.cmd = lib.getExe pkgs.statix;
-        yamllint.cmd = lib.getExe pkgs.yamllint;
       };
     };
   };
