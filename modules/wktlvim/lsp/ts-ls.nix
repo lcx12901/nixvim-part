@@ -12,14 +12,14 @@
         "vue"
       ];
 
-      on_attach.__raw = ''
-        function(client, bufnr)
-          local filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
-          if filetype == 'vue' then
-            vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
-          end
-        end
-      '';
+      # on_attach.__raw = ''
+      #   function(client, bufnr)
+      #     local filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
+      #     if filetype == 'vue' then
+      #       vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+      #     end
+      #   end
+      # '';
 
       init_options = {
         plugins = [
@@ -32,16 +32,16 @@
 
         maxTsServerMemory = 16184;
 
-        preferences = {
-          includeInlayParameterNameHints = "all";
-          includeInlayParameterNameHintsWhenArgumentMatchesName = true;
-          includeInlayFunctionParameterTypeHints = true;
-          includeInlayVariableTypeHints = true;
-          includeInlayVariableTypeHintsWhenTypeMatchesName = true;
-          includeInlayPropertyDeclarationTypeHints = true;
-          includeInlayFunctionLikeReturnTypeHints = true;
-          includeInlayEnumMemberValueHints = true;
-        };
+        # preferences = {
+        #   includeInlayParameterNameHints = "all";
+        #   includeInlayParameterNameHintsWhenArgumentMatchesName = true;
+        #   includeInlayFunctionParameterTypeHints = true;
+        #   includeInlayVariableTypeHints = true;
+        #   includeInlayVariableTypeHintsWhenTypeMatchesName = true;
+        #   includeInlayPropertyDeclarationTypeHints = true;
+        #   includeInlayFunctionLikeReturnTypeHints = true;
+        #   includeInlayEnumMemberValueHints = true;
+        # };
       };
     };
   };
