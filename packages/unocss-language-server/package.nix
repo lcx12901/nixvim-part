@@ -4,6 +4,7 @@
   fetchFromGitHub,
   fetchPnpmDeps,
   pnpmConfigHook,
+  pnpm,
   nodejs,
   nix-update-script,
   makeBinaryWrapper,
@@ -28,6 +29,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   nativeBuildInputs = [
     nodejs
+    pnpm
     pnpmConfigHook
     makeBinaryWrapper
   ];
