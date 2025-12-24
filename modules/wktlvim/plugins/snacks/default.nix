@@ -3,6 +3,7 @@
     ./bufdelete.nix
     ./lazygit.nix
     ./picker.nix
+    ./terminal.nix
   ];
 
   plugins = {
