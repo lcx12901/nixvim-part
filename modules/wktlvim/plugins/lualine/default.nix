@@ -3,11 +3,18 @@
   plugins.lualine = {
     enable = true;
 
-    lazyLoad.settings.event = [
-      "VimEnter"
-      "BufReadPost"
-      "BufNewFile"
-    ];
+    lazyLoad.settings = {
+      event = [
+        "VimEnter"
+        "BufReadPost"
+        "BufNewFile"
+      ];
+      before.__raw = lib.mkIf config.plugins.lz-n.enable ''
+        function()
+          pcall(vim.cmd, "packadd copilot-lualine")
+        end
+      '';
+    };
 
     settings = {
       options = {
