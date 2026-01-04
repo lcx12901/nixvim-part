@@ -74,7 +74,7 @@
 
           progress.enabled = true;
           signature.enabled = true;
-          hover.enabled = true;
+          hover.enabled = false;  # Use native hover to merge multiple LSP responses
         };
 
         popupmenu.backend = "nui";
