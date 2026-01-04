@@ -2,7 +2,12 @@
   plugins = {
     snacks = {
       settings = {
-        terminal.enabled = true;
+        terminal = {
+          enabled = true;
+          win = {
+            position = "float";
+          };
+        };
       };
     };
   };
