@@ -74,7 +74,7 @@
 
           progress.enabled = true;
           signature.enabled = true;
-          hover.enabled = false;  # Use native hover to merge multiple LSP responses
+          hover.enabled = false; # Use native hover to merge multiple LSP responses
         };
 
         popupmenu.backend = "nui";
@@ -170,6 +170,7 @@
               any = [
                 { find = "No information available"; }
                 { find = "No signature help available"; }
+                { find = "Empty hover response"; }
               ];
             };
             opts = {
