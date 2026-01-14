@@ -23,6 +23,18 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
+  nixConfig = {
+    extra-substituters = [
+      "https://wktlvim.cachix.org"
+      "https://nix-community.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "wktlvim.cachix.org-1:eNtq211GkOCpTk4ZWbSn8ov1p+Jvq1a5zDsmYWKthTw="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+    allow-import-from-derivation = false;
+  };
+
   outputs =
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
