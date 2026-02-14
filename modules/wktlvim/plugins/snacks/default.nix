@@ -20,6 +20,7 @@
             git_hl = true;
           };
         };
+        scroll.enabled = true;
         quickfile.enabled = true;
       };
     };
