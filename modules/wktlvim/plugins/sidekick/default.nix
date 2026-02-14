@@ -23,12 +23,12 @@
             desc = "Ask Prompt";
           }
           {
-            __unkeyed-1 = "<leader>asC";
+            __unkeyed-1 = "<leader>aso";
             mode = [
               "n"
               "v"
             ];
-            desc = "Copilot Toggle";
+            desc = "Opencode Toggle";
           }
         ];
 
@@ -55,25 +55,10 @@
     keymaps =
       (lib.optionals (!config.plugins.blink-cmp.enable && config.plugins.sidekick.enable) [
         {
-          mode = "n";
-          key = "<Tab>";
-          action.__raw = ''
-            function()
-              -- Try sidekick NES first
-              if require("sidekick").nes_jump_or_apply() then
-                return
-              end
-              -- fallback to buffer navigation
-              vim.cmd('bnext')
-            end
-          '';
-          options = {
-            expr = false;
-            desc = "Goto/Apply Next Edit Suggestion or Next Buffer";
-          };
-        }
-        {
-          mode = "i";
+          mode = [
+            "n"
+            "i"
+          ];
           key = "<Tab>";
           action.__raw = ''
             function()
@@ -99,13 +84,21 @@
               if require("sidekick").nes_jump_or_apply() then
                 return
               end
-              -- fallback to buffer navigation
-              vim.cmd('bnext')
+              -- Try copilot-lsp NES if available
+              ${lib.optionalString config.plugins.copilot-lua.enable ''
+                if vim.b[vim.api.nvim_get_current_buf()].nes_state then
+                  require("copilot-lsp.nes").apply_pending_nes()
+                  require("copilot-lsp.nes").walk_cursor_end_edit()
+                  return
+                end
+              ''}
+              -- fallback to normal tab
+              return "<Tab>"
             end
           '';
           options = {
-            expr = false;
-            desc = "Goto/Apply Next Edit Suggestion or Next Buffer";
+            expr = true;
+            desc = "Goto/Apply Next Edit Suggestion";
           };
         }
       ])
@@ -122,7 +115,7 @@
             "v"
           ];
           key = "<leader>asp";
-          action.__raw = "function() require('sidekick.cli').select_prompt() end";
+          action.__raw = "function() require('sidekick.cli').prompt() end";
           options.desc = "Ask Prompt";
         }
         {
@@ -130,9 +123,18 @@
             "n"
             "v"
           ];
-          key = "<leader>asc";
+          key = "<leader>asC";
           action.__raw = "function() require('sidekick.cli').toggle({ name = 'copilot', focus = true }) end";
           options.desc = "Copilot Toggle";
+        }
+        {
+          mode = [
+            "n"
+            "v"
+          ];
+          key = "<leader>aso";
+          action.__raw = "function() require('sidekick.cli').toggle({ name = 'opencode', focus = true }) end";
+          options.desc = "Opencode Toggle";
         }
       ];
   };
