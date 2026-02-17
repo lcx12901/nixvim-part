@@ -11,6 +11,7 @@
     ./lsp/nil-ls.nix
     ./lsp/ts-ls.nix
     ./lsp/unocss.nix
+    ./lsp/vue-ls.nix
   ];
 
   lsp = {
@@ -37,14 +38,13 @@
       marksman.enable = true;
       sqls.enable = true;
       statix.enable = true;
-      vue_ls.enable = true;
       yamlls.enable = true;
     };
   };
 
   keymapsOnEvents.LspAttach = [
     (lib.mkIf (!config.plugins.conform-nvim.enable) {
-      action = lib.nixvim.mkRaw ''vim.lsp.buf.format'';
+      action = lib.nixvim.mkRaw "vim.lsp.buf.format";
       mode = "v";
       key = "<leader>lf";
       options = {
