@@ -2,7 +2,10 @@
   lib,
   pkgs,
   ...
-}:
+}: let 
+  neovimVersion = pkgs.neovim.version or "0.0";
+  hasNeovim0_12 = lib.versionAtLeast neovimVersion "0.12";
+in
 {
   clipboard = {
     register = "unnamedplus";
@@ -169,7 +172,7 @@
     virtualedit = "block";
     startofline = true;
     title = true;
-
+  } // lib.optionalAttrs hasNeovim0_12 {
     # Use 0.12+/nightly popup capabilities when available.
     completefuzzycollect = "keyword,files,whole_line";
     completeitemalign = "abbr,kind,menu";
