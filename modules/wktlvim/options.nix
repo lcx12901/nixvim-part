@@ -169,5 +169,14 @@
     virtualedit = "block";
     startofline = true;
     title = true;
+
+    # Use 0.12+/nightly popup capabilities when available.
+    completefuzzycollect = "keyword,files,whole_line";
+    completeitemalign = "abbr,kind,menu";
+    completepopup = "height:12,width:60,border:single";
+    jumpoptions = "stack";
+    pumborder = "single";
+    pummaxwidth = 100;
+    completetimeout = 100;
   };
 }
