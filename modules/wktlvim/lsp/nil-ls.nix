@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 {
   lsp.servers.nil_ls = {
-    enable = true;
+    enable = false;
 
     config.settings = {
       formatting = {

@@ -9,6 +9,7 @@
     ./lsp/harper-ls.nix
     ./lsp/lspconfig.nix
     ./lsp/nil-ls.nix
+    ./lsp/nixd.nix
     ./lsp/ts-ls.nix
     ./lsp/unocss.nix
     ./lsp/vue-ls.nix
