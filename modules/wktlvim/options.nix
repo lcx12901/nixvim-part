@@ -155,9 +155,9 @@
     pumheight = 10; # Max popup menu items
     infercase = true;
     completeopt = [
+      "menu"
       "menuone"
       "noselect"
-      "popup"
     ]; # Native completion options
 
     # Command Line & Messages
