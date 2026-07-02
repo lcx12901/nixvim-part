@@ -7,22 +7,10 @@ let
 in
 {
   # Plugin by-name directory imports
-  imports =
-    (foldlAttrs (
+  imports = (
+    foldlAttrs (
       prev: name: type:
       prev ++ optional (type == "directory") (by-name + "/${name}")
-    ) [ ] (readDir by-name))
-    ++ [
-      ./diagnostics.nix
-      ./ft.nix
-      ./keymappings.nix
-      ./lsp.nix
-      ./options.nix
-      ./performance.nix
-    ];
-
-  nixpkgs = {
-    overlays = lib.attrValues self.overlays;
-    config.allowUnfree = true;
-  };
+    ) [ ] (readDir by-name)
+  );
 }
