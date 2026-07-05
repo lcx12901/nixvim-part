@@ -23,7 +23,12 @@
       sharedNixpkgs = import inputs.nixpkgs {
         inherit system;
         overlays = lib.attrValues self.overlays;
-        config.allowUnfree = true;
+        config = {
+          allowUnfree = true;
+          permittedInsecurePackages = [
+            "pnpm-10.34.0"
+          ];
+        };
       };
       lib = inputs.nixpkgs.lib;
     in

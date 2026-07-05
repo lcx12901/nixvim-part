@@ -21,7 +21,12 @@
       _module.args.pkgs = import inputs.nixpkgs {
         inherit system;
         overlays = lib.attrValues self.overlays;
-        config.allowUnfree = true;
+        config = {
+          allowUnfree = true;
+          permittedInsecurePackages = [
+            "pnpm-10.34.0"
+          ];
+        };
       };
 
       packages.default = config.packages.wktlvim;
