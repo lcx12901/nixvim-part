@@ -11,6 +11,7 @@ in
     ))
     ++ [
       # keep-sorted start
+      ./dependencies.nix
       ./diagnostic.nix
       ./keymappings.nix
       ./lsp.nix
