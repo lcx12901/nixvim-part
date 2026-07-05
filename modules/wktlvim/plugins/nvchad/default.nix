@@ -4,22 +4,91 @@
   ...
 }:
 let
-  # chadrc 配置
-  # 完整选项参考: https://github.com/NvChad/ui/blob/main/lua/nvconfig.lua
   chadrc = {
     ui = {
       statusline = {
         enabled = true;
-        theme = "vscode_colored"; # 可选: default, vscode, vscode_colored, minimal
+        theme = "minimal"; # default, vscode, vscode_colored, minimal
+        separator_style = "round";
       };
       tabufline = {
         enabled = true;
-        lazyload = true;
+        lazyload = false;
+        order = [
+          "buffers"
+          "tabs"
+        ];
       };
     };
     base46 = {
-      theme = "onedark"; # 默认主题
+      theme = "catppuccin"; # 默认主题
       transparency = false;
+      # 添加 navic 集成
+      integrations = [
+        "navic"
+        "blink"
+      ];
+      hl_override = {
+        # 传统高亮组
+        "Comment" = {
+          italic = true;
+        };
+        "Constant" = {
+          italic = true;
+        };
+        "String" = {
+          italic = true;
+        };
+        "Keyword" = {
+          italic = true;
+        };
+        "Function" = {
+          italic = true;
+        };
+        "Type" = {
+          italic = true;
+        };
+        # Treesitter 高亮组
+        "@comment" = {
+          italic = true;
+        };
+        "@constant" = {
+          italic = true;
+        };
+        "@string" = {
+          italic = true;
+        };
+        "@keyword" = {
+          italic = true;
+        };
+        "@function" = {
+          italic = true;
+        };
+        "@type" = {
+          italic = true;
+        };
+      };
+    };
+
+    term = {
+      float = {
+        relative = "editor";
+        row = 0.1;
+        col = 0.05;
+        width = 0.9;
+        height = 0.8;
+        border = "rounded";
+      };
+    };
+
+    colorify = {
+      enabled = true;
+      mode = "virtual"; # fg, bg, virtual
+      virt_text = "󱓻";
+      highlight = {
+        hex = true;
+        lspvars = true;
+      };
     };
   };
 
@@ -71,6 +140,9 @@ in
       dofile(vim.g.base46_cache .. "syntax")
       dofile(vim.g.base46_cache .. "treesitter")
       dofile(vim.g.base46_cache .. "devicons")
+      dofile(vim.g.base46_cache .. "term")
+      dofile(vim.g.base46_cache .. "navic")
+      dofile(vim.g.base46_cache .. "blink")
     end)
   '';
 
@@ -85,10 +157,4 @@ in
 
   # 设置 colorscheme
   colorscheme = "nvchad";
-
-  # 禁用冲突的 nixvim 模块
-  plugins = {
-    lualine.enable = lib.mkForce false;
-    bufferline.enable = lib.mkForce false;
-  };
 }
