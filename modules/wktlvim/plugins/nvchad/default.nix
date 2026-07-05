@@ -70,17 +70,6 @@ let
       };
     };
 
-    term = {
-      float = {
-        relative = "editor";
-        row = 0.1;
-        col = 0.05;
-        width = 0.9;
-        height = 0.8;
-        border = "rounded";
-      };
-    };
-
     colorify = {
       enabled = true;
       mode = "virtual"; # fg, bg, virtual
