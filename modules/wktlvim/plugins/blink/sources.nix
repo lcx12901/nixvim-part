@@ -15,6 +15,7 @@
         local common_sources = vim.deepcopy(base_sources)
 
         -- Add optional sources based on plugin availability
+        ${lib.optionalString config.plugins.windsurf-nvim.enable "table.insert(common_sources, 'codeium')"}
         ${lib.optionalString config.plugins.blink-emoji.enable "table.insert(common_sources, 'emoji')"}
         ${lib.optionalString (lib.elem pkgs.vimPlugins.blink-nerdfont-nvim config.extraPlugins) "table.insert(common_sources, 'nerdfont')"}
         ${lib.optionalString config.plugins.blink-cmp-spell.enable "if vim.tbl_contains({ 'markdown', 'text', 'gitcommit', 'scratch' }, vim.bo.filetype) then table.insert(common_sources, 'spell') end"}
@@ -74,6 +75,13 @@
             end
           '';
         };
+      };
+
+      codeium = lib.mkIf config.plugins.windsurf-nvim.enable {
+        name = "Codeium";
+        module = "codeium.blink";
+        async = true;
+        score_offset = 100;
       };
 
       lsp = {
