@@ -36,22 +36,5 @@
         desc = "Toggle Terminal";
       };
     }
-
-    {
-      mode = "n";
-      key = "<leader>ue1";
-      action = "<cmd>lua Snacks.terminal.toggle(nil, { id = 'term-2' })<CR>";
-      options = {
-        desc = "Toggle Terminal #2";
-      };
-    }
-    {
-      mode = "n";
-      key = "<leader>ue2";
-      action = "<cmd>lua Snacks.terminal.toggle(nil, { id = 'term-3' })<CR>";
-      options = {
-        desc = "Toggle Terminal #3";
-      };
-    }
   ];
 }
