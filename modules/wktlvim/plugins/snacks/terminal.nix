@@ -8,10 +8,10 @@
           win = {
             style = "float";
             relative = "editor";
-            row = 0.1;
+            row = 0.05;
             col = 0.05;
             width = 0.9;
-            height = 0.8;
+            height = 0.9;
             border = "rounded";
           };
         };
