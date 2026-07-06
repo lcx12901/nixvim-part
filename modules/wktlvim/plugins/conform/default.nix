@@ -1,4 +1,10 @@
-{ config, lib, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   plugins = {
     conform-nvim = {
       enable = true;
@@ -66,6 +72,28 @@
 
         formatters_by_ft = {
           nix = [ "nixfmt" ];
+          typescript = [ "eslint_d" ];
+          vue = [ "eslint_d" ];
+          json = {
+            __unkeyed-1 = "eslint_d";
+            __unkeyed-2 = "jq";
+            stop_after_first = true;
+          };
+          yaml = {
+            __unkeyed-1 = "eslint_d";
+            __unkeyed-2 = "yamlfmt";
+            stop_after_first = true;
+          };
+        };
+
+        formatters = {
+          eslint_d = {
+            command = lib.getExe pkgs.eslint_d;
+            cwd.__raw = ''
+              require("conform.util").root_file({"eslint.config.mjs"})
+            '';
+            require_cwd = true;
+          };
         };
       };
     };
