@@ -18,6 +18,16 @@
     colorizing_enabled = false;
     first_buffer_opened = false;
     whitespace_character_enabled = false;
+
+    # Neovide
+    neovide_refresh_rate = 60;
+    neovide_hide_mouse_when_typing = true;
+    neovide_no_idle = true;
+    neovide_cursor_antialiasing = true;
+    neovide_cursor_animate_command_line = true;
+    neovide_cursor_smooth_blink = true;
+    neovide_cursor_animate_in_insert_mode = true;
+    neovide_cursor_vfx_mode = "sonicboom";
   };
 
   opts = {
@@ -129,5 +139,8 @@
     virtualedit = "block";
     startofline = true;
     title = true;
+
+    # Neovide
+    guifont = "Maple Mono NF CN:h15";
   };
 }

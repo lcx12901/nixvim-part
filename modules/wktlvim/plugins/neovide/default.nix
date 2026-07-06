@@ -1,17 +1,6 @@
 {
   extraConfigLuaPre = ''
     if vim.g.neovide then
-      vim.g.neovide_refresh_rate = 60
-      vim.g.neovide_hide_mouse_when_typing = true
-      vim.g.neovide_no_idle = true
-      vim.g.neovide_cursor_antialiasing = true
-      vim.g.neovide_cursor_animate_command_line = true
-      vim.g.neovide_cursor_smooth_blink = true
-      vim.g.neovide_cursor_animate_in_insert_mode = true
-      vim.g.neovide_cursor_vfx_mode = "sonicboom"
-
-      vim.o.guifont = "Maple Mono NF CN:h15"
-
       -- copy_to_clipboard
       vim.keymap.set('v', '<C-S-c>', '"+y', { noremap = true, silent = true })
 
