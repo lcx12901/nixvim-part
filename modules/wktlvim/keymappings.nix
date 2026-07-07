@@ -83,6 +83,26 @@
                 };
               };
 
+              # Tab navigation
+              "]t" = {
+                action = "<cmd>tabnext<CR>";
+                options = {
+                  desc = "Next tab";
+                };
+              };
+              "[t" = {
+                action = "<cmd>tabprevious<CR>";
+                options = {
+                  desc = "Previous tab";
+                };
+              };
+              "<leader>bt" = {
+                action = "<cmd>tabclose<CR>";
+                options = {
+                  desc = "Close tab";
+                };
+              };
+
               # "<Leader>w" = {
               #   action = "<Cmd>w<CR>"; # Action to perform (save the file in this case)
               #   options = {
@@ -153,6 +173,32 @@
                 action = "<Cmd>split<CR>";
                 options = {
                   desc = "Horizontal split";
+                };
+              };
+
+              # Window navigation
+              "<C-h>" = {
+                action = "<C-w>h";
+                options = {
+                  desc = "Go to left window";
+                };
+              };
+              "<C-j>" = {
+                action = "<C-w>j";
+                options = {
+                  desc = "Go to lower window";
+                };
+              };
+              "<C-k>" = {
+                action = "<C-w>k";
+                options = {
+                  desc = "Go to upper window";
+                };
+              };
+              "<C-l>" = {
+                action = "<C-w>l";
+                options = {
+                  desc = "Go to right window";
                 };
               };
 
