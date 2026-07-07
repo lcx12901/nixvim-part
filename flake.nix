@@ -21,6 +21,7 @@
     };
     pkgs-by-name-for-flake-parts.url = "github:drupol/pkgs-by-name-for-flake-parts";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    unocss-language-server.url = "github:xna00/unocss-language-server";
   };
 
   nixConfig = {

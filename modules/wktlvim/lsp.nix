@@ -63,6 +63,10 @@
         };
       };
       vue_ls.enable = true;
+      unocss = {
+        enable = true;
+        package = pkgs.unocss-language-server;
+      };
     };
   };
 }
