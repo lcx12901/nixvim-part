@@ -4,12 +4,12 @@
 }:
 vimUtils.buildVimPlugin {
   pname = "ts-error-translator";
-  version = "2.0.1";
+  version = "unstable-2026-01-04";
 
   src = pkgs.fetchFromGitHub {
     owner = "dmmulroy";
     repo = "ts-error-translator.nvim";
-    rev = "c1e6a5529009e855eb102a668549679548757a05";
-    hash = "sha256-/eLbUkjFpAneMoITdknATvpDjnA5XMUjEKaDq0CG+ys=";
+    rev = "558abff11b9e8f4cefc0de09df780c56841c7a4b";
+    hash = "sha256-kjZwfvb0B7GC4dBBSdgC/zRmCUCfCm4H5J+8SFzANJ4=";
   };
 }
