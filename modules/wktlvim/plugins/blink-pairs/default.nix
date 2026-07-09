@@ -10,6 +10,22 @@
       ];
     };
 
+    settings = {
+      highlights = {
+        enabled = true;
+        cmdline = false;
+        groups = [
+          "BlinkPairsOrange"
+          "BlinkPairsPurple"
+          "BlinkPairsBlue"
+          "BlinkPairsRed"
+          "BlinkPairsYellow"
+          "BlinkPairsGreen"
+          "BlinkPairsCyan"
+          "BlinkPairsViolet"
+        ];
+      };
+    };
   };
 
   keymaps = lib.mkIf config.plugins.blink-pairs.enable [

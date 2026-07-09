@@ -23,10 +23,9 @@ let
     base46 = {
       theme = "catppuccin"; # 默认主题
       transparency = false;
-      # 添加 navic 集成
       integrations = [
         "navic"
-        "blink"
+        "blink-pair"
       ];
       hl_override = {
         # 传统高亮组
@@ -132,6 +131,8 @@ in
       dofile(vim.g.base46_cache .. "term")
       dofile(vim.g.base46_cache .. "navic")
       dofile(vim.g.base46_cache .. "blink")
+      dofile(vim.g.base46_cache .. "blink-pair")
+      dofile(vim.g.base46_cache .. "lsp")
     end)
   '';
 
