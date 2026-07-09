@@ -26,6 +26,10 @@ let
       integrations = [
         "navic"
         "blink-pair"
+        "notify"
+        "semantic_tokens"
+        "grug_far"
+        "flash"
       ];
       hl_override = {
         # 传统高亮组
@@ -133,6 +137,10 @@ in
       dofile(vim.g.base46_cache .. "blink")
       dofile(vim.g.base46_cache .. "blink-pair")
       dofile(vim.g.base46_cache .. "lsp")
+      dofile(vim.g.base46_cache .. "notify")
+      dofile(vim.g.base46_cache .. "semantic_tokens")
+      dofile(vim.g.base46_cache .. "grug_far")
+      dofile(vim.g.base46_cache .. "flash")
     end)
   '';
 
