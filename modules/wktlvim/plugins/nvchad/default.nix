@@ -30,6 +30,7 @@ let
         "semantic_tokens"
         "grug_far"
         "flash"
+        "rainbowdelimiters"
       ];
       hl_override = {
         # 传统高亮组
@@ -141,6 +142,7 @@ in
       dofile(vim.g.base46_cache .. "semantic_tokens")
       dofile(vim.g.base46_cache .. "grug_far")
       dofile(vim.g.base46_cache .. "flash")
+      dofile(vim.g.base46_cache .. "rainbowdelimiters")
     end)
   '';
 

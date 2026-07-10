@@ -12,7 +12,18 @@
       enable = true;
 
       settings = {
-        indent.enabled = true;
+        indent = {
+          enabled = true;
+          scope = {
+            hl = [
+              "RainbowDelimiterYellow"
+              "RainbowDelimiterOrange"
+              "RainbowDelimiterViolet"
+              "RainbowDelimiterBlue"
+              "RainbowDelimiterCyan"
+            ];
+          };
+        };
         input.enabled = true;
         statuscolumn = {
           enabled = true;
