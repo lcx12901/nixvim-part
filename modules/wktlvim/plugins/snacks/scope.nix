@@ -1,9 +1,4 @@
 {
-  config,
-  lib,
-  ...
-}:
-{
   plugins = {
     snacks = {
       settings = {
