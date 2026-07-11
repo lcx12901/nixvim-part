@@ -3,7 +3,6 @@
     update_in_insert = false;
     severity_sort = true;
 
-    # NOTE: Opt-in with 0.11
     virtual_text = {
       severity.min = "warn";
       source = "if_many";
@@ -22,10 +21,10 @@
 
     signs = {
       text = {
-        "__rawKey__vim.diagnostic.severity.ERROR" = "";
-        "__rawKey__vim.diagnostic.severity.WARN" = "";
-        "__rawKey__vim.diagnostic.severity.HINT" = "󰌵";
-        "__rawKey__vim.diagnostic.severity.INFO" = "";
+        "__rawKey__vim.diagnostic.severity.ERROR" = " ";
+        "__rawKey__vim.diagnostic.severity.WARN" = " ";
+        "__rawKey__vim.diagnostic.severity.HINT" = "󰌵 ";
+        "__rawKey__vim.diagnostic.severity.INFO" = " ";
       };
       texthl = {
         "__rawKey__vim.diagnostic.severity.ERROR" = "DiagnosticError";
