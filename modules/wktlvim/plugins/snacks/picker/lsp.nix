@@ -18,6 +18,14 @@
     }
     {
       mode = "n";
+      key = "<leader>ld";
+      action.__raw = "function() vim.diagnostic.open_float() end";
+      options = {
+        desc = "Show floating diagnostics";
+      };
+    }
+    {
+      mode = "n";
       key = "<leader>fl";
       action = "<cmd>lua Snacks.picker.lsp_symbols()<cr>";
       options = {
