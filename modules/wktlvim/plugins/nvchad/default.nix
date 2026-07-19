@@ -31,6 +31,7 @@ let
         "grug_far"
         "flash"
         "rainbowdelimiters"
+        "tiny-inline-diagnostic"
       ];
       hl_override = {
         # 传统高亮组
@@ -143,6 +144,7 @@ in
       dofile(vim.g.base46_cache .. "grug_far")
       dofile(vim.g.base46_cache .. "flash")
       dofile(vim.g.base46_cache .. "rainbowdelimiters")
+      dofile(vim.g.base46_cache .. "tiny-inline-diagnostic")
     end)
   '';
 
