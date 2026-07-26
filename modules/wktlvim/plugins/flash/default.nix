@@ -1,8 +1,22 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   plugins = {
     flash = {
       enable = true;
+
+      package = pkgs.vimPlugins.flash-nvim.overrideAttrs (old: {
+        patches = (old.patches or [ ]) ++ [
+          (pkgs.fetchpatch {
+            url = "https://github.com/folke/flash.nvim/pull/492.patch";
+            hash = "sha256-9Fm5eRqmv8HlUf7h0UYbJ+TB5T081ruhMpwkDEUsoYc=";
+          })
+        ];
+      });
 
       lazyLoad.settings.event = "DeferredUIEnter";
 
