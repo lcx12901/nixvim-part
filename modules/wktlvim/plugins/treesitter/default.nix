@@ -32,4 +32,38 @@
         lib.filter (g: grammarSet.${g.pname} or false) config.plugins.treesitter.package.allGrammars;
     };
   };
+
+  keymaps = lib.mkIf config.plugins.treesitter.enable [
+    {
+      mode = [
+        "n"
+        "x"
+      ];
+      key = "<A-o>";
+      action.__raw = ''
+        function()
+          if vim.treesitter.get_parser(nil, nil, { error = false }) then
+            vim.treesitter.select("parent", vim.v.count1)
+          else
+            vim.lsp.buf.selection_range(vim.v.count1)
+          end
+        end
+      '';
+      options.desc = "Expand syntax selection";
+    }
+    {
+      mode = "x";
+      key = "<A-i>";
+      action.__raw = ''
+        function()
+          if vim.treesitter.get_parser(nil, nil, { error = false }) then
+            vim.treesitter.select("child", vim.v.count1)
+          else
+            vim.lsp.buf.selection_range(-vim.v.count1)
+          end
+        end
+      '';
+      options.desc = "Shrink syntax selection";
+    }
+  ];
 }
