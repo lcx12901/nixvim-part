@@ -6,6 +6,8 @@
     servers = {
       # Languages
       bashls.enable = true;
+      dockerls.enable = true;
+      docker_language_server.enable = true;
       eslint = {
         enable = true;
         config = {
@@ -57,6 +59,8 @@
         enable = true;
         package = pkgs.unocss-language-server;
       };
+      oxlint.enable = true;
+      oxfmt.enable = true;
     };
   };
 }
