@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   lsp = {
     inlayHints.enable = true;
@@ -24,9 +29,15 @@
       yamlls.enable = true;
       nixd = {
         enable = true;
-        config.settings.nixd = {
-          formatting = {
-            command = [ "${lib.getExe pkgs.nixfmt}" ];
+        config = {
+          cmd = [
+            (lib.getExe config.lsp.servers.nixd.package)
+            "--log=error"
+          ];
+          settings.nixd = {
+            formatting = {
+              command = [ "${lib.getExe pkgs.nixfmt}" ];
+            };
           };
         };
       };
